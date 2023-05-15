@@ -1,10 +1,10 @@
 package com.luizhbfilho.jetpack_compose_tutorial
 
-
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -23,18 +23,18 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.compose.AppTheme
 import com.luizhbfilho.jetpack_compose_tutorial.data.Message
+import com.luizhbfilho.jetpack_compose_tutorial.ui.theme.AppTutorialTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
-            AppTheme {
+            AppTutorialTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    modifier = Modifier.fillMaxSize()
                 ) {
                     MessageCard(Message("Android", "Hello World"))
                 }
@@ -51,22 +51,27 @@ fun MessageCard(message: Message) {
             contentDescription = "Profile picture",
             modifier = Modifier
                 .size(40.dp)
-                .clip(CircleShape))
+                .clip(CircleShape)
+                .border(1.5.dp, MaterialTheme.colorScheme.secondary, CircleShape)
+        )
 
         Spacer(modifier = Modifier.width(8.dp))
 
         Column {
-            Text(text = message.author)
+            Text(
+                text = message.author,
+                color = MaterialTheme.colorScheme.secondary)
             Spacer(modifier = Modifier.height(4.dp))
             Text(text = message.body)
         }
     }
 }
 
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    AppTheme {
+    AppTutorialTheme {
         MessageCard(Message("Android", "Hello World"))
     }
 }
